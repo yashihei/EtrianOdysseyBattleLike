@@ -20,6 +20,7 @@ public class Actor
     public void ApplyHpDamage(int hpDamageValue)
     {
         Hp -= hpDamageValue;
+        Hp = Math.Max(Hp, 0);
     }
 
     public bool IsDead()
