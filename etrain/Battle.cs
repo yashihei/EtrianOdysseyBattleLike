@@ -19,7 +19,8 @@ public class Battle
 
         var players = actors.Where(actor => actor.IsPc).ToArray();
         var enemies = actors.Where(actor => !actor.IsPc).ToArray();
-        var enemyTexts = enemies.Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}").ToArray();
+        var aliveEnemies = enemies.Where(enemy => !enemy.IsDead()).ToArray();
+        var enemyTexts = aliveEnemies.Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}").ToArray();
         var commands = new List<Command>();
 
         // コマンド入力
@@ -27,8 +28,8 @@ public class Battle
         {
             Console.WriteLine("誰に攻撃しますか?");
             Console.WriteLine(string.Join(", ", enemyTexts));
-            var targetIndex = Math.Clamp(ReadNumber(), 0, enemies.Length - 1);
-            var command = new Command(player, enemies[targetIndex], naguru);
+            var targetIndex = Math.Clamp(ReadNumber(), 0, aliveEnemies.Length - 1);
+            var command = new Command(player, aliveEnemies[targetIndex], naguru);
             commands.Add(command);
         }
 
