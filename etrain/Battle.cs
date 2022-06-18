@@ -4,11 +4,11 @@ public class Battle
 {
     private int phase = 0;
     private IEnumerable<Actor> actors = new Actor[] {
-        new Actor(0, "player1", 100, 0, true),
-        new Actor(1, "player2", 100, 0, true),
-        new Actor(2, "enemy1", 100, 0, false),
-        new Actor(3, "enemy2", 100, 0, false) };
-    private ActiveSkill naguru = new ActiveSkill(0, "殴る", 10);
+        new(0, "player1", 100, 0, true),
+        new(1, "player2", 100, 0, true),
+        new(2, "enemy1", 100, 0, false),
+        new(3, "enemy2", 100, 0, false) };
+    private ActiveSkill naguru = new(0, "殴る", 10);
 
     public bool RunPhase()
     {
