@@ -42,8 +42,6 @@ public class Battle
 
     public void ProgressTurn()
     {
-        turn++;
-
         Debug.Assert(ValidateCommands(), "Invalid command!!");
 
         foreach (var command in commands)
@@ -55,6 +53,7 @@ public class Battle
         }
 
         commands.Clear();
+        turn++;
     }
 
     public bool IsEnd()
