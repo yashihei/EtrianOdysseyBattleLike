@@ -15,7 +15,7 @@ battle.EnterActors(actors);
 while (!battle.IsEnd())
 {
     battle.InputCommandsByConsole();
-    battle.ProgressPhase();
+    battle.ProgressTurn();
 }
 
 // TODO: 敗北対応

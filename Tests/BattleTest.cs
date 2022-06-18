@@ -25,7 +25,7 @@ public class BattleTest
         };
         battle.InputCommands(commands);
 
-        battle.ProgressPhase();
+        battle.ProgressTurn();
 
         Assert.True(battle.IsEnd());
     }

@@ -4,7 +4,7 @@ namespace Etrain;
 
 public class Battle
 {
-    private int phase = 1;
+    private int turn = 1;
     private IReadOnlyCollection<Actor> players;
     private IReadOnlyCollection<Actor> enemies;
     private List<Command> commands = new();
@@ -27,7 +27,7 @@ public class Battle
         var enemyTexts = aliveEnemies.Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}").ToArray();
 
         Console.WriteLine($"=====================================");
-        Console.WriteLine($"phase{phase}");
+        Console.WriteLine($"turn{turn}");
         Console.WriteLine($"=====================================");
 
         foreach (var player in players)
@@ -40,9 +40,9 @@ public class Battle
         }
     }
 
-    public void ProgressPhase()
+    public void ProgressTurn()
     {
-        phase++;
+        turn++;
 
         Debug.Assert(ValidateCommands(), "Invalid command!!");
 
