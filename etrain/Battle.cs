@@ -27,7 +27,7 @@ public class Battle
         {
             Console.WriteLine("誰に攻撃しますか?");
             Console.WriteLine(string.Join(", ", enemyTexts));
-            var targetIndex = Math.Clamp(int.Parse(Console.ReadLine() ?? "0"), 0, enemies.Length - 1);
+            var targetIndex = Math.Clamp(ReadNumber(), 0, enemies.Length - 1);
             var command = new Command(player, enemies[targetIndex], naguru);
             commands.Add(command);
         }
@@ -48,5 +48,19 @@ public class Battle
         }
 
         return true;
+    }
+
+    private static int ReadNumber()
+    {
+        while (true)
+        {
+            var success = int.TryParse(Console.ReadLine(), out var number);
+            if (success)
+            {
+                return number;
+            }
+
+            Console.WriteLine("数値を入力してください");
+        }
     }
 }
