@@ -68,9 +68,10 @@ public class Battle
             return false;
         }
 
-        var commandTargetIds = commands.Select(command => command.Target.Id);
-        var enemyIds = enemies.Select(enemy => enemy.Id);
-        if (commandTargetIds.Except(enemyIds).Any())
+        // 全プレイヤーのコマンド発行してるか
+        var playerIds = players.Select(player => player.Id);
+        var commandSourceIds = commands.Select(command => command.Source.Id);
+        if (playerIds.Except(commandSourceIds).Any())
         {
             return false;
         }
