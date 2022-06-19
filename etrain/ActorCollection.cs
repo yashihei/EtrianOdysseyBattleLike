@@ -11,6 +11,11 @@ public class ActorCollection
         enemies = actors.Where(actor => !actor.IsPc);
     }
 
+    public IEnumerable<Actor> AliveActors()
+    {
+        return AlivePlayers().Concat(AliveEnemies());
+    }
+
     public IEnumerable<Actor> AlivePlayers()
     {
         return players.Where(player => !player.IsDead());

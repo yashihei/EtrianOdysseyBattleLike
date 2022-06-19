@@ -4,10 +4,11 @@ namespace Etrain;
 
 public class Battle
 {
+    private static ActiveSkill naguru = new(0, "殴る", 10);
+
     private int turn = 1;
     private ActorCollection actorCollection;
     private List<Command> commands = new();
-    private ActiveSkill naguru = new(0, "殴る", 10);
 
     public void EnterActors(IEnumerable<Actor> actors)
     {
@@ -40,6 +41,8 @@ public class Battle
 
     public void ProgressTurn()
     {
+        commands.AddRange(CalculateEnemiesCommand(actorCollection));
+
         Debug.Assert(ValidateCommands(), "Invalid command!!");
 
         foreach (var command in commands)
@@ -56,25 +59,42 @@ public class Battle
 
     public bool IsEnd()
     {
+        // FIXME: 敗北を判定する
         return !actorCollection.AliveEnemies().Any();
     }
 
     private bool ValidateCommands()
     {
-        if (commands.Count != actorCollection.AlivePlayers().Count())
+        if (commands.Count != actorCollection.AliveActors().Count())
         {
             return false;
         }
 
-        // 全プレイヤーのコマンド発行してるか
-        var playerIds = actorCollection.AlivePlayers().Select(player => player.Id);
+        // 全ての生存Actorのコマンド発行してるか
+        var actorIds = actorCollection.AliveActors().Select(actor => actor.Id);
         var commandSourceIds = commands.Select(command => command.Source.Id);
-        if (playerIds.Except(commandSourceIds).Any())
+        if (actorIds.Except(commandSourceIds).Any())
         {
             return false;
         }
 
         return true;
+    }
+
+    private static IEnumerable<Command> CalculateEnemiesCommand(ActorCollection actorCollection)
+    {
+        var commands = new List<Command>();
+        var players = actorCollection.AlivePlayers().ToArray();
+
+        foreach (var enemy in actorCollection.AliveEnemies())
+        {
+            // とりあえずランダム攻撃させてる
+            var targetIndex = new Random().Next(0, players.Length);
+            var target = players[targetIndex];
+            commands.Add(new Command(enemy, target, naguru));
+        }
+
+        return commands;
     }
 
     private static int ReadNumber()
