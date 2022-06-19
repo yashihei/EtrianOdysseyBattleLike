@@ -4,8 +4,6 @@ namespace Etrain;
 
 public class Battle
 {
-    private static ActiveSkill naguru = new(0, "殴る", 10);
-
     private int turn = 1;
     private ActorCollection actorCollection;
     private List<Command> commands = new();
@@ -34,6 +32,7 @@ public class Battle
             Console.WriteLine("誰に攻撃しますか?");
             Console.WriteLine(string.Join(", ", enemyTexts));
             var targetIndex = Math.Clamp(ReadNumber(), 0, aliveEnemies.Length - 1);
+            var naguru = new ActiveSkill(0, "ぼこぼこ殴る", 10);
             var command = new Command(player, aliveEnemies[targetIndex], naguru);
             commands.Add(command);
         }
@@ -85,6 +84,7 @@ public class Battle
     {
         var commands = new List<Command>();
         var players = actorCollection.AlivePlayers().ToArray();
+        var naguru = new ActiveSkill(1, "ちょっと殴る", 5);
 
         foreach (var enemy in actorCollection.AliveEnemies())
         {
