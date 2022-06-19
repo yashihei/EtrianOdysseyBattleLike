@@ -5,15 +5,13 @@ namespace Etrain;
 public class Battle
 {
     private int turn = 1;
-    private IReadOnlyCollection<Actor> players;
-    private IReadOnlyCollection<Actor> enemies;
+    private ActorCollection actorCollection;
     private List<Command> commands = new();
     private ActiveSkill naguru = new(0, "殴る", 10);
 
     public void EnterActors(IEnumerable<Actor> actors)
     {
-        players = actors.Where(actor => actor.IsPc).ToArray();
-        enemies = actors.Where(actor => !actor.IsPc).ToArray();
+        actorCollection = new ActorCollection(actors);
     }
 
     public void InputCommands(IEnumerable<Command> commands)
@@ -23,14 +21,14 @@ public class Battle
 
     public void InputCommandsByConsole()
     {
-        var aliveEnemies = enemies.Where(enemy => !enemy.IsDead()).ToArray();
+        var aliveEnemies = actorCollection.AliveEnemies().ToArray();
         var enemyTexts = aliveEnemies.Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}").ToArray();
 
         Console.WriteLine($"=====================================");
         Console.WriteLine($"turn{turn}");
         Console.WriteLine($"=====================================");
 
-        foreach (var player in players)
+        foreach (var player in actorCollection.AlivePlayers())
         {
             Console.WriteLine("誰に攻撃しますか?");
             Console.WriteLine(string.Join(", ", enemyTexts));
@@ -58,18 +56,18 @@ public class Battle
 
     public bool IsEnd()
     {
-        return enemies.All(enemy => enemy.IsDead());
+        return !actorCollection.AliveEnemies().Any();
     }
 
     private bool ValidateCommands()
     {
-        if (commands.Count != players.Count)
+        if (commands.Count != actorCollection.AlivePlayers().Count())
         {
             return false;
         }
 
         // 全プレイヤーのコマンド発行してるか
-        var playerIds = players.Select(player => player.Id);
+        var playerIds = actorCollection.AlivePlayers().Select(player => player.Id);
         var commandSourceIds = commands.Select(command => command.Source.Id);
         if (playerIds.Except(commandSourceIds).Any())
         {
