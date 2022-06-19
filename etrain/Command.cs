@@ -13,9 +13,9 @@ public class Command
         this.ActiveSkill = activeSkill;
     }
 
-    public Hit Evaluate()
+    public IAct Evaluate()
     {
-        return new Hit(Source, Target, ActiveSkill.DamageValue);
+        return new HpDamage(Source, Target, ActiveSkill.DamageValue);
     }
 
     public override string ToString()

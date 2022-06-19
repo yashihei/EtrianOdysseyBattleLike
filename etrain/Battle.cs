@@ -46,10 +46,10 @@ public class Battle
 
         foreach (var command in commands)
         {
-            var hit = command.Evaluate();
-            hit.Execute();
+            var result = command.Evaluate();
+            result.Execute();
             Console.WriteLine(command.ToString());
-            Console.WriteLine(hit.ToString());
+            Console.WriteLine(result.ToString());
         }
 
         commands.Clear();

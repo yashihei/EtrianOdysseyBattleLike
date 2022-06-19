@@ -1,12 +1,12 @@
 ﻿namespace Etrain;
 
-public class Hit
+public class HpDamage : IAct
 {
     public Actor Source { get; }
     public Actor Target { get; }
     public int DamageValue { get; }
 
-    public Hit(Actor source, Actor target, int damageValue)
+    public HpDamage(Actor source, Actor target, int damageValue)
     {
         Source = source;
         Target = target;
