@@ -25,4 +25,16 @@ public class ActorCollection
     {
         return enemies.Where(enemy => !enemy.IsDead());
     }
+
+    public string AlivePlayersText()
+    {
+        var playerTexts = AlivePlayers().Select((player, idx) => $"[{idx}] {player.Name} HP={player.Hp}");
+        return string.Join(", ", playerTexts);
+    }
+
+    public string AliveEnemiesText()
+    {
+        var enemyTexts = AliveEnemies().Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}");
+        return string.Join(", ", enemyTexts);
+    }
 }

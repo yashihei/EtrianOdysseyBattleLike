@@ -20,17 +20,16 @@ public class Battle
 
     public void InputCommandsByConsole()
     {
-        var aliveEnemies = actorCollection.AliveEnemies().ToArray();
-        var enemyTexts = aliveEnemies.Select((enemy, idx) => $"[{idx}] {enemy.Name} HP={enemy.Hp}").ToArray();
-
         Console.WriteLine($"=====================================");
         Console.WriteLine($"turn{turn}");
+        Console.WriteLine(actorCollection.AlivePlayersText());
+        Console.WriteLine(actorCollection.AliveEnemiesText());
         Console.WriteLine($"=====================================");
 
+        var aliveEnemies = actorCollection.AliveEnemies().ToArray();
         foreach (var player in actorCollection.AlivePlayers())
         {
-            Console.WriteLine("誰に攻撃しますか?");
-            Console.WriteLine(string.Join(", ", enemyTexts));
+            Console.WriteLine($"{player.Name}は誰に攻撃しますか?");
             var targetIndex = Math.Clamp(ReadNumber(), 0, aliveEnemies.Length - 1);
             var naguru = new ActiveSkill(0, "ぼこぼこ殴る", 10);
             var command = new Command(player, aliveEnemies[targetIndex], naguru);
