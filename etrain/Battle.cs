@@ -4,6 +4,11 @@ namespace Etrain;
 
 public class Battle
 {
+    public enum Result
+    {
+        Win, Lose, Undecided
+    }
+
     private int turn = 1;
     private ActorCollection actorCollection;
     private List<Command> commands = new();
@@ -35,12 +40,12 @@ public class Battle
             var command = new Command(player, aliveEnemies[targetIndex], naguru);
             commands.Add(command);
         }
+
+        commands.AddRange(CalculateEnemiesCommand(actorCollection));
     }
 
     public void ProgressTurn()
     {
-        commands.AddRange(CalculateEnemiesCommand(actorCollection));
-
         Debug.Assert(ValidateCommands(), "Invalid command!!");
 
         foreach (var command in commands)
@@ -55,10 +60,21 @@ public class Battle
         turn++;
     }
 
-    public bool IsEnd()
+    public Result GetResult()
     {
-        // FIXME: 敗北を判定する
-        return !actorCollection.AliveEnemies().Any();
+        // 敵が全滅
+        if (!actorCollection.AliveEnemies().Any())
+        {
+            return Result.Win;
+        }
+
+        // プレイヤー達が全滅
+        if (!actorCollection.AlivePlayers().Any())
+        {
+            return Result.Lose;
+        }
+
+        return Result.Undecided;
     }
 
     private bool ValidateCommands()

@@ -12,11 +12,17 @@ var actors = new Actor[] {
 
 battle.EnterActors(actors);
 
-while (!battle.IsEnd())
+while (battle.GetResult() == Battle.Result.Undecided)
 {
     battle.InputCommandsByConsole();
     battle.ProgressTurn();
 }
 
-// TODO: 敗北対応
-Console.WriteLine("バトルに勝利した！");
+if (battle.GetResult() == Battle.Result.Win)
+{
+    Console.WriteLine("バトルに勝利した！");
+}
+if (battle.GetResult() == Battle.Result.Lose)
+{
+    Console.WriteLine("バトルに敗北した…");
+}
