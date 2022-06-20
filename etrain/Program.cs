@@ -14,7 +14,8 @@ battle.EnterActors(actors);
 
 while (battle.GetResult() == Battle.Result.Undecided)
 {
-    battle.InputCommandsByConsole();
+    battle.InputPlayerCommandsByConsole();
+    battle.InputEnemyCommandsByAI();
     battle.ProgressTurn();
 }
 

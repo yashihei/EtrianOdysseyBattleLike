@@ -23,7 +23,7 @@ public class Battle
         this.commands.AddRange(commands);
     }
 
-    public void InputCommandsByConsole()
+    public void InputPlayerCommandsByConsole()
     {
         Console.WriteLine($"=====================================");
         Console.WriteLine($"turn{turn}");
@@ -40,7 +40,10 @@ public class Battle
             var command = new Command(player, aliveEnemies[targetIndex], naguru);
             commands.Add(command);
         }
+    }
 
+    public void InputEnemyCommandsByAI()
+    {
         commands.AddRange(CalculateEnemiesCommand(actorCollection));
     }
 
