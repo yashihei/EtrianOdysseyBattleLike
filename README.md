@@ -1,0 +1,3 @@
+﻿# EtrianOdysseyBattleLike
+
+CLIで世界樹の迷宮のバトルシステムを模写してみようという実験プロジェクトです
