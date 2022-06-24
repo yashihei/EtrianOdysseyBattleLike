@@ -55,7 +55,6 @@ public class Battle
         {
             var result = command.Evaluate();
             result.Execute();
-            Console.WriteLine(command.ToString());
             Console.WriteLine(result.ToString());
         }
 

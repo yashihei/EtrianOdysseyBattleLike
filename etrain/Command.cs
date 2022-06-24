@@ -15,11 +15,6 @@ public class Command
 
     public IAct Evaluate()
     {
-        return new HpDamage(Source, Target, ActiveSkill.DamageValue);
-    }
-
-    public override string ToString()
-    {
-        return $"{Source.Name}は{ActiveSkill.Name}を使った！";
+        return new TriggerActiveSkill(Source, Target, ActiveSkill);
     }
 }
