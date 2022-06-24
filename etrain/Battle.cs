@@ -34,10 +34,19 @@ public class Battle
         var aliveEnemies = actorCollection.AliveEnemies().ToArray();
         foreach (var player in actorCollection.AlivePlayers())
         {
-            Console.WriteLine($"{player.Name}は誰に攻撃しますか?");
-            var targetIndex = Math.Clamp(ReadNumber(), 0, aliveEnemies.Length - 1);
-            var naguru = new ActiveSkill(0, "ぼこぼこ殴る", 10);
-            var command = new Command(player, aliveEnemies[targetIndex], naguru);
+            Console.WriteLine($"{player.Name}の行動");
+
+            var skills = player.ActiveSkills.ToArray();
+            var skillsText = string.Join(", ", skills.Select((skill, idx) => $"[{idx}] {skill.Name}"));
+            Console.WriteLine("使用するとくぎを選択してください");
+            Console.WriteLine(skillsText);
+            var skillIndex = ReadNumber(0, skills.Length - 1);
+
+            Console.WriteLine("誰に攻撃しますか?");
+            Console.WriteLine(actorCollection.AliveEnemiesText());
+            var enemyIndex = ReadNumber(0, aliveEnemies.Length - 1);
+
+            var command = new Command(player, aliveEnemies[enemyIndex], skills[skillIndex]);
             commands.Add(command);
         }
     }
