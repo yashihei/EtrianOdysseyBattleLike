@@ -114,17 +114,25 @@ public class Battle
         return commands;
     }
 
-    private static int ReadNumber()
+    private static int ReadNumber(int min, int max)
     {
         while (true)
         {
-            var success = int.TryParse(Console.ReadLine(), out var number);
-            if (success)
+            var readSuccess = int.TryParse(Console.ReadLine(), out var number);
+            if (!readSuccess)
             {
-                return number;
+                Console.WriteLine("数値を入力してください");
+                continue;
             }
 
-            Console.WriteLine("数値を入力してください");
+            var inRange = number >= min && number <= max;
+            if (!inRange)
+            {
+                Console.WriteLine($"{min}から{max}の範囲内で入力してください");
+                continue;
+            }
+
+            return number;
         }
     }
 }
