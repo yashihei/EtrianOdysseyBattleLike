@@ -10,15 +10,15 @@ public class BattleTest
     {
         var battle = new Battle();
 
-        var player = new Actor(0, "player1", 100, 0, true);
-        var enemy = new Actor(1, "enemy1", 10, 0, false);
+        var testSkill = new ActiveSkill(0, "test", 10);
+        var player = new Actor(0, "player1", 100, 0, true, new []{ testSkill });
+        var enemy = new Actor(1, "enemy1", 10, 0, false, new []{ testSkill });
         var actors = new[]
         {
             player, enemy
         };
         battle.EnterActors(actors);
 
-        var testSkill = new ActiveSkill(0, "test", 10);
         var commands = new Command[]
         {
             new(player, enemy, testSkill),
@@ -36,15 +36,15 @@ public class BattleTest
     {
         var battle = new Battle();
 
-        var player = new Actor(0, "player1", 10, 0, true);
-        var enemy = new Actor(1, "enemy1", 100, 0, false);
+        var testSkill = new ActiveSkill(0, "test", 10);
+        var player = new Actor(0, "player1", 10, 0, true, new []{ testSkill });
+        var enemy = new Actor(1, "enemy1", 100, 0, false, new []{ testSkill });
         var actors = new[]
         {
             player, enemy
         };
         battle.EnterActors(actors);
 
-        var testSkill = new ActiveSkill(0, "test", 10);
         var commands = new Command[]
         {
             new(player, enemy, testSkill),

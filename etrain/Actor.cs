@@ -7,14 +7,16 @@ public class Actor
     public int Hp { get; private set; }
     public int Tp { get; }
     public bool IsPc { get; }
+    public IEnumerable<ActiveSkill> ActiveSkills;
 
-    public Actor(int id, string name, int hp, int tp, bool isPc)
+    public Actor(int id, string name, int hp, int tp, bool isPc, IEnumerable<ActiveSkill> activeSkills)
     {
         Id = id;
         Name = name;
         Hp = hp;
         Tp = tp;
         IsPc = isPc;
+        ActiveSkills = activeSkills;
     }
 
     public void ApplyHpDamage(int hpDamageValue)
