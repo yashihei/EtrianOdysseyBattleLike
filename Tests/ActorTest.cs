@@ -14,4 +14,13 @@ public class ActorTest
 
         Assert.False(actor.Hp < 0);
     }
+
+    [Fact]
+    public void MaxHP以上回復しない()
+    {
+        var actor = new Actor(0, "hoge", 100, 0, true, Array.Empty<ActiveSkill>());
+        actor.ApplyHpHeal(100);
+
+        Assert.False(actor.Hp > actor.MaxHp);
+    }
 }
