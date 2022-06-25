@@ -103,6 +103,8 @@ public class Battle
             return false;
         }
 
+        // TODO: 所持してるActiveSkillか?
+
         return true;
     }
 
@@ -110,6 +112,7 @@ public class Battle
     {
         var commands = new List<Command>();
         var players = actorCollection.AlivePlayers().ToArray();
+        // FIXME: 所持してるActiveSkillで攻撃する
         var naguru = new ActiveSkill(1, "ちょっと殴る", 5);
 
         foreach (var enemy in actorCollection.AliveEnemies())
