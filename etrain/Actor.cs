@@ -7,7 +7,7 @@ public class Actor
     public int Hp { get; private set; }
     public int Tp { get; }
     public bool IsPc { get; }
-    public IEnumerable<ActiveSkill> ActiveSkills;
+    public IEnumerable<ActiveSkill> ActiveSkills { get; }
 
     public Actor(int id, string name, int hp, int tp, bool isPc, IEnumerable<ActiveSkill> activeSkills)
     {
