@@ -18,9 +18,14 @@ public class TriggerActiveSkill : IAct
     public void Execute()
     {
         actLogs.Add($"{Source.Name}は{ActiveSkill.Name}を使った！");
-        var hpDamage = new HpDamage(Source, Target, ActiveSkill.DamageValue);
-        hpDamage.Execute();
-        actLogs.Add(hpDamage.ToString());
+        IAct act = ActiveSkill.Type switch
+        {
+            ActiveSkill.FormulaType.Attack => new HpDamage(Source, Target, ActiveSkill.BaseValue),
+            ActiveSkill.FormulaType.Heal => new HpHeal(Source, Target, ActiveSkill.BaseValue),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        act.Execute();
+        actLogs.Add(act.ToString());
     }
 
     public override string ToString()
