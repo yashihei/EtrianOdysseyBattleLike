@@ -4,8 +4,8 @@ using Etrain;
 
 var battle = new Battle();
 
-var bokoboko = new ActiveSkill(0, "ぼこぼこ殴る", 10, ActiveSkill.FormulaType.Attack);
-var chotto = new ActiveSkill(1, "ちょっと殴る", 5, ActiveSkill.FormulaType.Attack);
+var bokoboko = new ActiveSkill(0, "ぼこぼこ殴る", 10, ActiveSkillFormulaType.Attack);
+var chotto = new ActiveSkill(1, "ちょっと殴る", 5, ActiveSkillFormulaType.Attack);
 var actors = new Actor[] {
     new(0, "player1", 100, 0, true, new []{ bokoboko }),
     new(1, "player2", 100, 0, true, new []{ bokoboko }),

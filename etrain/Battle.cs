@@ -113,7 +113,7 @@ public class Battle
         var commands = new List<Command>();
         var players = actorCollection.AlivePlayers().ToArray();
         // FIXME: 所持してるActiveSkillで攻撃する
-        var naguru = new ActiveSkill(1, "ちょっと殴る", 5, ActiveSkill.FormulaType.Attack);
+        var naguru = new ActiveSkill(1, "ちょっと殴る", 5, ActiveSkillFormulaType.Attack);
 
         foreach (var enemy in actorCollection.AliveEnemies())
         {
