@@ -32,6 +32,7 @@ public class Battle
         Console.WriteLine($"=====================================");
 
         var aliveEnemies = actorCollection.AliveEnemies().ToArray();
+        var alivePlayers = actorCollection.AlivePlayers().ToArray();
         foreach (var player in actorCollection.AlivePlayers())
         {
             Console.WriteLine($"{player.Name}の行動");
@@ -42,11 +43,26 @@ public class Battle
             Console.WriteLine(skillsText);
             var skillIndex = ReadNumber(0, skills.Length - 1);
 
-            Console.WriteLine("誰に攻撃しますか?");
-            Console.WriteLine(actorCollection.AliveEnemiesText());
-            var enemyIndex = ReadNumber(0, aliveEnemies.Length - 1);
+            Actor targetActor;
+            Console.WriteLine("誰に使用しますか?");
+            var selectedSkill = skills[skillIndex];
+            switch (selectedSkill.TargetType)
+            {
+                case ActiveSkillTargetType.Player:
+                    Console.WriteLine(actorCollection.AlivePlayersText());
+                    var playerIndex = ReadNumber(0, aliveEnemies.Length - 1);
+                    targetActor = alivePlayers[playerIndex];
+                    break;
+                case ActiveSkillTargetType.Enemy:
+                    Console.WriteLine(actorCollection.AliveEnemiesText());
+                    var enemyIndex = ReadNumber(0, aliveEnemies.Length - 1);
+                    targetActor = aliveEnemies[enemyIndex];
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
-            var command = new Command(player, aliveEnemies[enemyIndex], skills[skillIndex]);
+            var command = new Command(player, targetActor, selectedSkill);
             commands.Add(command);
         }
     }
@@ -104,6 +120,7 @@ public class Battle
         }
 
         // TODO: 所持してるActiveSkillか?
+        // TODO: TargetTypeに適合したTargetか
 
         return true;
     }
