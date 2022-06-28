@@ -119,7 +119,16 @@ public class Battle
             return false;
         }
 
-        // TODO: 所持してるActiveSkillか?
+        // 所持してるActiveSkillか
+        foreach (var command in commands)
+        {
+            var sourceActor = command.Source;
+            if (sourceActor.ActiveSkills.All(skill => skill.Id != command.ActiveSkill.Id))
+            {
+                return false;
+            }
+        }
+
         // TODO: TargetTypeに適合したTargetか
 
         return true;
