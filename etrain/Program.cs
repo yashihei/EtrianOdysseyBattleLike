@@ -6,8 +6,9 @@ var battle = new Battle();
 
 var bokoboko = new ActiveSkill(0, "ぼこぼこ殴る", 10, ActiveSkillFormulaType.Attack, ActiveSkillTargetType.Enemy);
 var chotto = new ActiveSkill(1, "ちょっと殴る", 5, ActiveSkillFormulaType.Attack, ActiveSkillTargetType.Enemy);
+var heal = new ActiveSkill(2, "ヒール", 100, ActiveSkillFormulaType.Heal, ActiveSkillTargetType.Friend);
 var actors = new Actor[] {
-    new(0, "player1", 100, 0, true, new []{ bokoboko }),
+    new(0, "player1", 100, 0, true, new []{ bokoboko, heal }),
     new(1, "player2", 100, 0, true, new []{ bokoboko }),
     new(2, "enemy1", 100, 0, false, new []{ chotto }),
     new(3, "enemy2", 100, 0, false, new []{ chotto }) };
