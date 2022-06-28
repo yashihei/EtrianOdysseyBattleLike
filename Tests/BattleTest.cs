@@ -10,7 +10,7 @@ public class BattleTest
     {
         var battle = new Battle();
 
-        var testSkill = new ActiveSkill(0, "test", 10, ActiveSkillFormulaType.Attack);
+        var testSkill = new ActiveSkill(0, "test", 10, ActiveSkillFormulaType.Attack, ActiveSkillTargetType.Enemy);
         var player = new Actor(0, "player1", 100, 0, true, new []{ testSkill });
         var enemy = new Actor(1, "enemy1", 10, 0, false, new []{ testSkill });
         var actors = new[]
@@ -36,7 +36,7 @@ public class BattleTest
     {
         var battle = new Battle();
 
-        var testSkill = new ActiveSkill(0, "test", 10, ActiveSkillFormulaType.Attack);
+        var testSkill = new ActiveSkill(0, "test", 10, ActiveSkillFormulaType.Attack, ActiveSkillTargetType.Enemy);
         var player = new Actor(0, "player1", 10, 0, true, new []{ testSkill });
         var enemy = new Actor(1, "enemy1", 100, 0, false, new []{ testSkill });
         var actors = new[]
