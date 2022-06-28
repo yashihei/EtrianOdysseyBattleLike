@@ -7,7 +7,7 @@ public enum ActiveSkillFormulaType
 
 public enum ActiveSkillTargetType
 {
-    Player, Enemy
+    Friend, Enemy
 }
 
 public class ActiveSkill

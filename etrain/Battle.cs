@@ -48,7 +48,7 @@ public class Battle
             var selectedSkill = skills[skillIndex];
             switch (selectedSkill.TargetType)
             {
-                case ActiveSkillTargetType.Player:
+                case ActiveSkillTargetType.Friend:
                     Console.WriteLine(actorCollection.AlivePlayersText());
                     var playerIndex = ReadNumber(0, aliveEnemies.Length - 1);
                     targetActor = alivePlayers[playerIndex];
