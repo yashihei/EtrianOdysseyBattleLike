@@ -129,7 +129,16 @@ public class Battle
             }
         }
 
-        // TODO: TargetTypeに適合したTargetか
+        // TargetTypeに適合したTargetか
+        foreach (var command in commands)
+        {
+            var conflict = command.Source.IsPc ^ command.Target.IsPc;
+            if (conflict && command.ActiveSkill.TargetType == ActiveSkillTargetType.Friend ||
+                !conflict && command.ActiveSkill.TargetType == ActiveSkillTargetType.Enemy)
+            {
+                return false;
+            }
+        }
 
         return true;
     }
